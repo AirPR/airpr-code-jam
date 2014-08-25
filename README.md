@@ -27,7 +27,7 @@ Note: All timestamps that are referred in this problem are of the ISO-8601 forma
 You will also be provided a historical training dataset of all article times for the set of sites over `2014-07-03 - 2014-07-24`. This can help if you wish to use optimization algorithms or machine learning/AI approaches to approach this problem.
 
   
-The training dataset will have N rows. Each row has a Feed ID and the timestamps of a week of articles for that site. Feed and Scoring API use the same Feed IDs as provided in this dataset. 
+The training dataset will have N rows. Each row has a Feed ID and the timestamps of articles for that site. Feed and Scoring API use the same Feed IDs as provided in this dataset. 
 
 
 # Input:
