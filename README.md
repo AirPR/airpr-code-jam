@@ -24,7 +24,7 @@ Note: All timestamps that are referred in this problem are of the ISO-8601 forma
   
 
 # Dataset:
-You will also be provided a historical training dataset of all article times for the set of sites over one week. This can help if you wish to use optimization algorithms or machine learning/AI approaches to approach this problem.
+You will also be provided a historical training dataset of all article times for the set of sites over 7/3-7/24. This can help if you wish to use optimization algorithms or machine learning/AI approaches to approach this problem.
 
   
 The training dataset will have N rows. Each row has a Feed ID and the timestamps of a week of articles for that site. Feed and Scoring API use the same Feed IDs as provided in this dataset. 
@@ -44,7 +44,7 @@ The training dataset will have N rows. Each row has a Feed ID and the timestamps
 The first row of the input file is the Feed API Endpoint, the second row is the date to poll and  N rows following that contain Feed IDs. We've provided two sample inputs for you to verify that your program responds to our input format.
 
   
-For development purposes, you can use http://codejam.airpr.com/poll as the Feed API Endpoint and http://codejam.airpr.com/score as the Scoring API Endpoint.  This development API will only work for the first 100 Feed IDs in the provided training dataset, but will access both the training and scoring data for those feeds. For ranking, you’ll be scored on the performance on the full data set. 
+For development purposes, you can use http://codejam.airpr.com/poll as the Feed API Endpoint and http://codejam.airpr.com/score as the Scoring API Endpoint.  This development API will only work for the first 100 Feed IDs in the provided training dataset, but will also access an additional day of feed data outside of the training set (7/25). For ranking, you’ll be scored on the performance on the full set of Feed IDs for 7/25. 
 
 
 
