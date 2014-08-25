@@ -41,7 +41,7 @@ The training dataset will have N rows. Each row has a Feed ID and the timestamps
 ```
 
   
-The first row of the input file is the Feed API Endpoint, the second row is the date to poll and  N rows following that contain Feed IDs. We've provided two sample inputs for you to verify that program responds to our input format.
+The first row of the input file is the Feed API Endpoint, the second row is the date to poll and  N rows following that contain Feed IDs. We've provided two sample inputs for you to verify that your program responds to our input format.
 
   
 For development purposes, you can use http://codejam.airpr.com/poll as the Feed API Endpoint and http://codejam.airpr.com/score as the Scoring API Endpoint.  This development API will only work for the first 100 Feed IDs in the provided training dataset, but will access both the training and scoring data for those feeds. For ranking, you’ll be scored on the performance on the full data set. 
