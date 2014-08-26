@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <title>MDV Code Jam by sharamfm</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <h1>MDV Code Jam</h1>
+        <h2></h2>
+        <a href="https://github.com/sharamfm/airpr-code-jam" class="button"><small>View project on</small>GitHub</a>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h1>
+<a name="background" class="anchor" href="#background"><span class="octicon octicon-link"></span></a>Background:</h1>
+
+<p>A web crawler browses through the entire or a specific subset of the Internet in order to index its content. Seeds are a set of URLs that act as the starting point for the crawler. For the sake of this problem, let’s assume that the seeds are RSS feed URLs of multiple news and blog publications. Since there are articles being published throughout the day, the RSS feeds are updated frequently. Some feeds are updated more often than others depending on feed size, article frequency, time of day, etc. </p>
+
+<p>It is very important for web crawlers to re-crawl the same feed repeatedly in order to capture its updates with minimum latency, but it’s also important to conserve bandwidth and processing time on rarely updated feeds. Determining re-crawling strategies has been a subject of active research in the web community.  </p>
+
+<p>In this problem, we attempt to arrive at an optimal crawling strategy for a set of sites, balancing article freshness with crawl count and avoiding missed articles.</p>
+
+<h1>
+<a name="problem" class="anchor" href="#problem"><span class="octicon octicon-link"></span></a>Problem:</h1>
+
+<p>In this problem, we simulate an efficient feed reader. Given historical information about article timestamps in each feed, you should schedule optimal times to poll over the next day (in UTC). </p>
+
+<p>Your program will be provided the ‘Feed ID’ and it should make a call to our simulated feed API with a poll time. The API will return the 10 latest article timestamps before that poll time which your program should use to schedule the next poll. If more than 10 articles have been published since your previous poll, the additional articles will not be captured!</p>
+
+<p>This process should be repeated until the end of the day at which your program should print out the feed ids and times chosen for polls during that day. For development purposes, if you want to see the score for your polling strategy you can hit our scoring API endpoint(with appropriate data as described below in the Scoring API section) which will return you the score as well as the components of your score. </p>
+
+<p>Note: All timestamps that are referred in this problem are of the ISO-8601 format, in the UTC timezone.</p>
+
+<h1>
+<a name="dataset" class="anchor" href="#dataset"><span class="octicon octicon-link"></span></a>Dataset:</h1>
+
+<p>You will also be provided a historical training dataset of all article times for the set of sites over <code>2014-07-03 - 2014-07-24</code>. This can help if you wish to use optimization algorithms or machine learning/AI approaches to approach this problem.</p>
+
+<p>The training dataset will have N rows. Each row has a Feed ID and the timestamps of articles for that site. Feed and Scoring API use the same Feed IDs as provided in this dataset. </p>
+
+<h1>
+<a name="input" class="anchor" href="#input"><span class="octicon octicon-link"></span></a>Input:</h1>
+
+<pre><code>&lt;Feed API Endpoint&gt;
+&lt;Date of Poll&gt;
+&lt;Feed ID&gt; 
+&lt;Feed ID&gt; 
+&lt;Feed ID&gt; 
+…
+</code></pre>
+
+<p>The first row of the input file is the Feed API Endpoint, the second row is the date to poll and  N rows following that contain Feed IDs. We've provided two sample inputs for you to verify that your program responds to our input format.</p>
+
+<p>For development purposes, you can use <a href="http://codejam.airpr.com/poll">http://codejam.airpr.com/poll</a> as the Feed API Endpoint and <a href="http://codejam.airpr.com/score">http://codejam.airpr.com/score</a> as the Scoring API Endpoint.  This development API will only work for the first 100 Feed IDs in the provided training dataset, but will also access an additional day of feed data outside of the training set (<code>2014-07-25</code>). For ranking, you’ll be scored on the performance on the full set of Feed IDs for <code>2014-07-25</code>. </p>
+
+<h1>
+<a name="output" class="anchor" href="#output"><span class="octicon octicon-link"></span></a>Output:</h1>
+
+<p>Should be a file with N rows. Each row should have the Feed ID and a comma separated sequence of timestamps to run polls on the date given (2nd row of the input file).</p>
+
+<h1>
+<a name="submitting" class="anchor" href="#submitting"><span class="octicon octicon-link"></span></a>Submitting:</h1>
+
+<p>Email <a href="mailto:codejam@airpr.com">codejam@airpr.com</a> with a zip file containing your program file(s) and a build script to compile your code if necessary. To run your code, we will first call <code>./build.sh</code> and then <code>cat inputfile | ./codejam &gt; outputfile</code>. </p>
+
+<p>We will execute your code in a docker (<a href="https://www.docker.com/">https://www.docker.com/</a>) environment, running on Ubuntu 14.04</p>
+
+<p>Example layout:
+  ./README.txt
+  ./build.sh
+  ./codejam
+  ./models/mymodel.dat</p>
+
+<h1>
+<a name="feed-api" class="anchor" href="#feed-api"><span class="octicon octicon-link"></span></a>Feed API:</h1>
+
+<h2>
+<a name="request" class="anchor" href="#request"><span class="octicon octicon-link"></span></a>Request:</h2>
+
+<pre><code>GET &lt;Feed API Endpoint&gt;?feed_id=&lt;Feed ID&gt;&amp;poll_time=&lt;ISO 8601 formatted timestamp&gt;
+</code></pre>
+
+<h2>
+<a name="response" class="anchor" href="#response"><span class="octicon octicon-link"></span></a>Response:</h2>
+
+<pre><code>{
+
+  “feed_id”: &lt;Feed ID&gt;,
+
+  “poll_time”: &lt;ISO 8601 formatted timestamp&gt;,
+
+  “article_times: [&lt;ISO 8601 formatted timestamp&gt;, &lt;ISO 8601 formatted timestamp&gt;, &lt;ISO 8601 formatted timestamp&gt;... ]
+
+}
+</code></pre>
+
+<h1>
+<a name="scoring-api" class="anchor" href="#scoring-api"><span class="octicon octicon-link"></span></a>Scoring API:</h1>
+
+<h2>
+<a name="request-1" class="anchor" href="#request-1"><span class="octicon octicon-link"></span></a>Request:</h2>
+
+<pre><code>POST &lt;Scoring API Endpoint&gt;
+
+with x-www-form-urlencoded parameters:
+
+feed_id=&lt;Feed ID&gt;
+
+poll_times[]=&lt;ISO 8601 formatted timestamp&gt;
+
+poll_times[]=&lt;ISO 8601 formatted timestamp&gt;
+
+poll_times[]=&lt;ISO 8601 formatted timestamp&gt;
+
+...
+</code></pre>
+
+<h2>
+<a name="response-1" class="anchor" href="#response-1"><span class="octicon octicon-link"></span></a>Response:</h2>
+
+<pre><code>{
+
+  “feed_id”: &lt;Feed ID&gt;,
+
+“poll_times: [&lt;ISO 8601 formatted timestamp&gt;, &lt;ISO 8601 formatted timestamp&gt;, &lt;ISO 8601 formatted timestamp&gt;... ]
+
+  “total_score”: Float,
+
+  “freshness_score”: Float,
+
+  “missed_article_penalty”: Float,
+
+  “efficiency_bonus”: Float
+
+}
+</code></pre>
+
+<h1>
+<a name="examples" class="anchor" href="#examples"><span class="octicon octicon-link"></span></a>Examples:</h1>
+
+<p>Our test dataset for this example has 24 articles on 2015-08-02, one every hour.</p>
+
+<p>Polling at 2015-08-02T23:59:59.000Z gives the latest 10 articles:</p>
+
+<pre><code>curl -X GET -H Cache-Control:no-cache &lt;Feed API Endpoint&gt;?feed_id=1&amp;poll_time=2015-08-02T23:59:59.000Z
+
+
+{
+
+    "feed_id": 1,
+
+    "poll_time": "2015-08-02T23:59:59.000Z",
+
+    "article_times": [
+
+        "2015-08-02T23:00:00.000Z",
+
+        "2015-08-02T22:00:00.000Z",
+
+        "2015-08-02T21:00:00.000Z",
+
+        "2015-08-02T20:00:00.000Z",
+
+        "2015-08-02T19:00:00.000Z",
+
+        "2015-08-02T18:00:00.000Z",
+
+        "2015-08-02T17:00:00.000Z",
+
+        "2015-08-02T16:00:00.000Z",
+
+        "2015-08-02T15:00:00.000Z",
+
+        "2015-08-02T14:00:00.000Z"
+
+    ]
+
+}
+</code></pre>
+
+<p>Scoring this polling strategy of only one poll at the end of the day reveals 14 articles missed and low freshness score, although it is efficient.</p>
+
+<pre><code>curl -X POST -H Cache-Control:no-cache -H Content-Type:application/x-www-form-urlencoded -d 'feed_id=1&amp;poll_times%5B%5D=2015-08-01T23%3A59%3A59' &lt;Scoring API Endpoint&gt;
+
+
+{
+
+    "feed_id": 1,
+
+    "poll_times": [
+
+        "2015-08-01T23:59:59.000Z"
+
+    ],
+
+    "total_score": "-1343.00",
+
+    "freshness_score": "10.00",
+
+    "missed_article_penalty": "-1400.00",
+
+    "efficiency_bonus": "47.00"
+
+}
+</code></pre>
+
+<p>Polling more often avoids the missed article penalty, although this can still be improved:</p>
+
+<pre><code>curl -X POST -H Cache-Control:no-cache -H Content-Type:application/x-www-form-urlencoded -d 'feed_id=1&amp;poll_times%5B%5D=2015-08-01T00%3A00%3A59&amp;poll_times%5B%5D=2015-08-01T04%3A00%3A59&amp;poll_times%5B%5D=2015-08-01T08%3A00%3A59&amp;poll_times%5B%5D=2015-08-01T12%3A00%3A59&amp;poll_times%5B%5D=2015-08-01T16%3A00%3A59&amp;poll_times%5B%5D=2015-08-01T20%3A00%3A59&amp;poll_times%5B%5D=2015-08-01T23%3A00%3A59' &lt;Scoring API Endpoint&gt;
+
+
+
+{
+
+    "feed_id": 1,
+
+    "poll_times": [
+
+        "2015-08-01T23:00:59.000Z",
+
+        "2015-08-01T20:00:59.000Z",
+
+        "2015-08-01T16:00:59.000Z",
+
+        "2015-08-01T12:00:59.000Z",
+
+        "2015-08-01T08:00:59.000Z",
+
+        "2015-08-01T04:00:59.000Z",
+
+        "2015-08-01T00:00:59.000Z"
+
+    ],
+
+    "total_score": "159.56",
+
+    "article_score": "118.56",
+
+    "missed_article_penalty": "0.00",
+
+    "efficiency_bonus": "41.00"
+
+}
+</code></pre>
+        </section>
+
+        <aside id="sidebar">
+          <a href="https://github.com/sharamfm/airpr-code-jam/zipball/master" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/sharamfm/airpr-code-jam/tarball/master" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
+
+          <p class="repo-owner"><a href="https://github.com/sharamfm/airpr-code-jam"></a> is maintained by <a href="https://github.com/sharamfm">sharamfm</a>.</p>
+
+          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
+    </div>
+
+            <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-21624290-5");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>
