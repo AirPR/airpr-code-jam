@@ -233,3 +233,6 @@ curl -X POST -H Cache-Control:no-cache -H Content-Type:application/x-www-form-ur
 
 }
 ```
+
+# Questions:
+Any issues or questions? Open an issue on GitHub! https://github.com/sharamfm/mdv-code-jam/issues
