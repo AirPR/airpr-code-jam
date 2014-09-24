@@ -55,7 +55,7 @@ Should be a file with N rows. Each row should have the Feed ID and a comma separ
 # Submitting:
 Email codejam@airpr.com with a zip file containing your program file(s) and a build script to compile your code if necessary. To run your code, we will first call `./build.sh` and then `cat inputfile | ./codejam > outputfile`. 
 
-We will execute your code in a docker (https://www.docker.com/) environment, running on Ubuntu 14.04
+We will execute your code on Ubuntu 14.04
 
 Example layout:
   ./README.txt
@@ -235,4 +235,4 @@ curl -X POST -H Cache-Control:no-cache -H Content-Type:application/x-www-form-ur
 ```
 
 # Questions:
-Any issues or questions? Open an issue on GitHub! https://github.com/sharamfm/mdv-code-jam/issues
+Any issues or questions? Open an issue on GitHub! https://github.com/airpr/airpr-code-jam/issues
