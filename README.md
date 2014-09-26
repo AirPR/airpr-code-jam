@@ -135,7 +135,7 @@ Our test dataset for this example has 24 articles on 2015-08-02, one every hour.
 Polling at 2015-08-02T23:59:59.000Z gives the latest 10 articles:
 
 ```
-curl -X GET -H Cache-Control:no-cache <Feed API Endpoint>?feed_id=1&poll_time=2015-08-02T23:59:59.000Z
+curl -X GET -H Cache-Control:no-cache "http://codejam.airpr.com/poll?feed_id=1&poll_time=2014-07-24T23:59:59.000Z"
 
   
 {
@@ -201,7 +201,7 @@ curl -X POST -H Cache-Control:no-cache -H Content-Type:application/x-www-form-ur
 Polling more often avoids the missed article penalty, although this can still be improved:
 
 ```
-curl -X POST -H Cache-Control:no-cache -H Content-Type:application/x-www-form-urlencoded -d 'feed_id=1&poll_times%5B%5D=2015-08-01T00%3A00%3A59&poll_times%5B%5D=2015-08-01T04%3A00%3A59&poll_times%5B%5D=2015-08-01T08%3A00%3A59&poll_times%5B%5D=2015-08-01T12%3A00%3A59&poll_times%5B%5D=2015-08-01T16%3A00%3A59&poll_times%5B%5D=2015-08-01T20%3A00%3A59&poll_times%5B%5D=2015-08-01T23%3A00%3A59' <Scoring API Endpoint>
+curl -X POST -H Cache-Control:no-cache -H Content-Type:application/x-www-form-urlencoded -d 'feed_id=1&poll_times%5B%5D=2015-08-01T00%3A00%3A59&poll_times%5B%5D=2015-08-01T04%3A00%3A59&poll_times%5B%5D=2015-08-01T08%3A00%3A59&poll_times%5B%5D=2015-08-01T12%3A00%3A59&poll_times%5B%5D=2015-08-01T16%3A00%3A59&poll_times%5B%5D=2015-08-01T20%3A00%3A59&poll_times%5B%5D=2015-08-01T23%3A00%3A59' http://codejam.airpr.com/score
 
   
   
