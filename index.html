@@ -77,7 +77,38 @@
 
 <p>For development purposes, you can use <a href="http://codejam.airpr.com/poll">http://codejam.airpr.com/poll</a> as the Feed API Endpoint and <a href="http://codejam.airpr.com/score">http://codejam.airpr.com/score</a> as the Scoring API Endpoint.  This development API will only work for the first 100 Feed IDs in the provided training dataset, but will also access an additional day of feed data outside of the training set (<code>2014-07-25</code>). For ranking, you’ll be scored on the performance on the full set of Feed IDs for <code>2014-07-25</code>. </p>
 
-<h1>
+<table>
+<thead><tr>
+<th>Data Range</th>
+<th align="center">Training Dataset</th>
+<th align="center">Development API  (codejam.airpr.com)</th>
+<th align="center">Ranking API  (no access)</th>
+</tr></thead>
+<tbody>
+<tr>
+<td>
+<code>2014-07-03</code> to <code>2014-07-24</code>
+</td>
+<td align="center">yes</td>
+<td align="center">yes</td>
+<td align="center">yes</td>
+</tr>
+<tr>
+<td>
+<code>2014-07-25</code> for first 100 feed_ids</td>
+<td align="center"><strong>no</strong></td>
+<td align="center">yes</td>
+<td align="center">yes</td>
+</tr>
+<tr>
+<td>
+<code>2014-07-25</code> for remaining feed_ids</td>
+<td align="center"><strong>no</strong></td>
+<td align="center"><strong>no</strong></td>
+<td align="center">yes</td>
+</tr>
+</tbody>
+</table><h1>
 <a name="output" class="anchor" href="#output"><span class="octicon octicon-link"></span></a>Output:</h1>
 
 <p>Should be a file with N rows. Each row should have the Feed ID and a comma separated sequence of timestamps to run polls on the date given (2nd row of the input file).</p>
@@ -162,11 +193,11 @@ poll_times[]=&lt;ISO 8601 formatted timestamp&gt;
 <h1>
 <a name="examples" class="anchor" href="#examples"><span class="octicon octicon-link"></span></a>Examples:</h1>
 
-<p>Our test dataset for this example has 24 articles on 2015-08-02, one every hour.</p>
+<p>Our test dataset for feed_id 1 has 24 articles on 2015-08-02, one every hour. Note that feed_id 1 is not part of the actual training dataset, and the article dates are in the month of 2015-08, not 2014-07 like the rest of the training data.</p>
 
 <p>Polling at 2015-08-02T23:59:59.000Z gives the latest 10 articles:</p>
 
-<pre><code>curl -X GET -H Cache-Control:no-cache &lt;Feed API Endpoint&gt;?feed_id=1&amp;poll_time=2015-08-02T23:59:59.000Z
+<pre><code>curl -X GET -H Cache-Control:no-cache "http://codejam.airpr.com/poll?feed_id=1&amp;poll_time=2014-07-24T23:59:59.000Z"
 
 
 {
@@ -230,7 +261,7 @@ poll_times[]=&lt;ISO 8601 formatted timestamp&gt;
 
 <p>Polling more often avoids the missed article penalty, although this can still be improved:</p>
 
-<pre><code>curl -X POST -H Cache-Control:no-cache -H Content-Type:application/x-www-form-urlencoded -d 'feed_id=1&amp;poll_times%5B%5D=2015-08-01T00%3A00%3A59&amp;poll_times%5B%5D=2015-08-01T04%3A00%3A59&amp;poll_times%5B%5D=2015-08-01T08%3A00%3A59&amp;poll_times%5B%5D=2015-08-01T12%3A00%3A59&amp;poll_times%5B%5D=2015-08-01T16%3A00%3A59&amp;poll_times%5B%5D=2015-08-01T20%3A00%3A59&amp;poll_times%5B%5D=2015-08-01T23%3A00%3A59' &lt;Scoring API Endpoint&gt;
+<pre><code>curl -X POST -H Cache-Control:no-cache -H Content-Type:application/x-www-form-urlencoded -d 'feed_id=1&amp;poll_times%5B%5D=2015-08-01T00%3A00%3A59&amp;poll_times%5B%5D=2015-08-01T04%3A00%3A59&amp;poll_times%5B%5D=2015-08-01T08%3A00%3A59&amp;poll_times%5B%5D=2015-08-01T12%3A00%3A59&amp;poll_times%5B%5D=2015-08-01T16%3A00%3A59&amp;poll_times%5B%5D=2015-08-01T20%3A00%3A59&amp;poll_times%5B%5D=2015-08-01T23%3A00%3A59' http://codejam.airpr.com/score
 
 
 
