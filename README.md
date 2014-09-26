@@ -2,7 +2,7 @@
 A web crawler browses through the entire or a specific subset of the Internet in order to index its content. Seeds are a set of URLs that act as the starting point for the crawler. For the sake of this problem, let’s assume that the seeds are RSS feed URLs of multiple news and blog publications. Since there are articles being published throughout the day, the RSS feeds are updated frequently. Some feeds are updated more often than others depending on feed size, article frequency, time of day, etc. 
 
   
-It is very important for web crawlers to re-crawl the same feed repeatedly in order to capture its updates with minimum latency, but it’s also important to conserve bandwidth and processing time on rarely updated feeds. Determining re-crawling strategies has been a subject of active research in the web community.  
+It is very important for web crawlers to re-crawl the same feed repeatedly in order to capture its updates with minimum latency, but it’s also important to conserve bandwidth and processing time on rarely updated feeds. Determining re-crawling strategies has been a subject of active research in the web community.
 
   
 In this problem, we attempt to arrive at an optimal crawling strategy for a set of sites, balancing article freshness with crawl count and avoiding missed articles.
@@ -28,6 +28,10 @@ You will also be provided a historical training dataset of all article times for
 
   
 The training dataset will have N rows. Each row has a Feed ID and the timestamps of articles for that site. Feed and Scoring API use the same Feed IDs as provided in this dataset. 
+
+
+# Notes:
+There are many different approaches to solving this problem! For example, you can try using the dataset to classify the different feed IDs, or you could ignore the dataset completely and optimize for each feed on the fly with the results from each poll. Some feeds may update at specific times or only on specific days of the week.
 
 
 # Input:
