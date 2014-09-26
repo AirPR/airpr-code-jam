@@ -129,7 +129,7 @@ poll_times[]=<ISO 8601 formatted timestamp>
   
 
 # Examples:
-Our test dataset for this feed_id 1 has 24 articles on 2015-08-02, one every hour. This is not part of the actual dataset.
+Our test dataset for feed\_id 1 has 24 articles on 2015-08-02, one every hour. Note that feed\_id 1 is not part of the actual training dataset, and the article dates are in the month of 2015-08, not 2014-07 like the rest of the training data.
 
   
 Polling at 2015-08-02T23:59:59.000Z gives the latest 10 articles:
