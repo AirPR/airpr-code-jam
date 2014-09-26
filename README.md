@@ -21,8 +21,6 @@ This process should be repeated until the end of the day at which your program s
   
 Note: All timestamps that are referred in this problem are of the ISO-8601 format, in the UTC timezone.
 
-  
-
 # Dataset:
 You will also be provided a historical training dataset of all article times for the set of sites over `2014-07-03 - 2014-07-24`. This can help if you wish to use optimization algorithms or machine learning/AI approaches to approach this problem.
 
@@ -50,6 +48,11 @@ The first row of the input file is the Feed API Endpoint, the second row is the 
   
 For development purposes, you can use http://codejam.airpr.com/poll as the Feed API Endpoint and http://codejam.airpr.com/score as the Scoring API Endpoint.  This development API will only work for the first 100 Feed IDs in the provided training dataset, but will also access an additional day of feed data outside of the training set (`2014-07-25`). For ranking, you’ll be scored on the performance on the full set of Feed IDs for `2014-07-25`. 
 
+Data Range | Training Dataset | Development API  (`codejam.airpr.com`) | Ranking API  (`no access`)
+-----------|:----------------:|:-----------------------------------:|:-----------------------:
+`2014-07-03` to `2014-07-24` | yes | yes | yes
+`2014-07-25` for first 100 feed_ids | **no** | yes | yes
+`2014-07-25` for remaining feed_ids | **no** | **no** | yes
 
 
 # Output:
