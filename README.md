@@ -192,7 +192,7 @@ curl -X POST -H Cache-Control:no-cache -H Content-Type:application/x-www-form-ur
 
     "total_score": "-1343.00",
 
-    "freshness_score": "10.00",
+    "article_score": "10.00",
 
     "missed_article_penalty": "-1400.00",
 
