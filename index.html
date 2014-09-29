@@ -55,7 +55,13 @@
 
 <p>You will also be provided a historical training dataset of all article times for the set of sites over <code>2014-07-03 - 2014-07-24</code>. This can help if you wish to use optimization algorithms or machine learning/AI approaches to approach this problem.</p>
 
-<p>The training dataset will have N rows. Each row has a Feed ID and the timestamps of articles for that site. Feed and Scoring API use the same Feed IDs as provided in this dataset. </p>
+<p>The training dataset will have N rows. Each row has a Feed ID and the timestamps of articles for that site, separated by spaces. Feed and Scoring API use the same Feed IDs as provided in this dataset. </p>
+
+<pre><code>&lt;Feed ID&gt; &lt;Date of Poll&gt; &lt;Date of Poll&gt; &lt;Date of Poll&gt; ...
+&lt;Feed ID&gt; &lt;Date of Poll&gt; &lt;Date of Poll&gt; &lt;Date of Poll&gt; ...
+&lt;Feed ID&gt; &lt;Date of Poll&gt; &lt;Date of Poll&gt; &lt;Date of Poll&gt; ...
+…
+</code></pre>
 
 <h1>
 <a name="notes" class="anchor" href="#notes"><span class="octicon octicon-link"></span></a>Notes:</h1>
@@ -111,7 +117,13 @@
 </table><h1>
 <a name="output" class="anchor" href="#output"><span class="octicon octicon-link"></span></a>Output:</h1>
 
-<p>Should be a file with N rows. Each row should have the Feed ID and a comma separated sequence of timestamps to run polls on the date given (2nd row of the input file).</p>
+<p>Should be a file with N rows. Each row should have the Feed ID and a space separated sequence of timestamps to run polls on the date given (2nd row of the input file).</p>
+
+<pre><code>&lt;Feed ID&gt; &lt;Date of Poll&gt; &lt;Date of Poll&gt; &lt;Date of Poll&gt; ...
+&lt;Feed ID&gt; &lt;Date of Poll&gt; &lt;Date of Poll&gt; &lt;Date of Poll&gt; ...
+&lt;Feed ID&gt; &lt;Date of Poll&gt; &lt;Date of Poll&gt; &lt;Date of Poll&gt; ...
+…
+</code></pre>
 
 <h1>
 <a name="submitting" class="anchor" href="#submitting"><span class="octicon octicon-link"></span></a>Submitting:</h1>
