@@ -25,8 +25,14 @@ Note: All timestamps that are referred in this problem are of the ISO-8601 forma
 You will also be provided a historical training dataset of all article times for the set of sites over `2014-07-03 - 2014-07-24`. This can help if you wish to use optimization algorithms or machine learning/AI approaches to approach this problem.
 
   
-The training dataset will have N rows. Each row has a Feed ID and the timestamps of articles for that site. Feed and Scoring API use the same Feed IDs as provided in this dataset. 
+The training dataset will have N rows. Each row has a Feed ID and the timestamps of articles for that site, separated by spaces. Feed and Scoring API use the same Feed IDs as provided in this dataset. 
 
+```
+<Feed ID> <Date of Poll> <Date of Poll> <Date of Poll> ...
+<Feed ID> <Date of Poll> <Date of Poll> <Date of Poll> ...
+<Feed ID> <Date of Poll> <Date of Poll> <Date of Poll> ...
+…
+```
 
 # Notes:
 There are many different approaches to solving this problem! For example, you can try using the dataset to classify the different feed IDs, or you could ignore the dataset completely and optimize for each feed on the fly with the results from each poll. Some feeds may update at specific times or only on specific days of the week.
@@ -56,8 +62,13 @@ Data Range | Training Dataset | Development API  (`codejam.airpr.com`) | Ranking
 
 
 # Output:
-Should be a file with N rows. Each row should have the Feed ID and a comma separated sequence of timestamps to run polls on the date given (2nd row of the input file).
-
+Should be a file with N rows. Each row should have the Feed ID and a space separated sequence of timestamps to run polls on the date given (2nd row of the input file).
+```
+<Feed ID> <Date of Poll> <Date of Poll> <Date of Poll> ...
+<Feed ID> <Date of Poll> <Date of Poll> <Date of Poll> ...
+<Feed ID> <Date of Poll> <Date of Poll> <Date of Poll> ...
+…
+```
 
 # Submitting:
 Email codejam@airpr.com with a zip file containing your program file(s) and a build script to compile your code if necessary. To run your code, we will first call `./build.sh` and then `cat inputfile | ./codejam > outputfile`. 
